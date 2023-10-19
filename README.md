@@ -16,3 +16,15 @@ These are the properties you can use in the querystring:
 | amount   | Amount in tokens (DAI) that will be charged per month | 5                                          |
 
 After the subscription has been purchased, an event will be sent to the parent window, which can be listened to like this:
+```js
+window.addEventListener(
+  "message",
+  (event) => {
+    if (event.origin !== "https://llamasubs.vercel.app") return;
+    if(event.data.subscribed === true){
+      // Handle subscription fulfillment (eg hide iframe, go to the next step...)
+    }
+  },
+  false,
+);
+```
