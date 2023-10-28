@@ -3,7 +3,7 @@
 ## Check if the user already has a subscription
 https://api.thegraph.com/subgraphs/name/0xngmi/llamasubs-optimism/graphql
 
-## Get user subscribed
+## Subscribe popup
 Add an iframe to your html like the following:
 ```html
 <iframe src="https://llamasubs.vercel.app/subscribe?to=0x08a3c2A819E3de7ACa384c798269B3Ce1CD0e437&amount=4"></iframe>
