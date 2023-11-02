@@ -2,30 +2,30 @@
 
 ## Check if the user already has a subscription
 ```js
-function isSubscribed(userAddress){
+function isSubscribed(receiverAddress, userAddress){
   return fetch("https://api.thegraph.com/subgraphs/name/0xngmi/llamasubs-optimism", {
       method:"post",
       body: JSON.stringify({
-          query: `query Subs($now:BigInt, $userAddress:Bytes){
-    subs(where:{
-      owner: $userAddress,
-      startTimestamp_lt: $now,
-      realExpiration_gte: $now
-    }){
-      startTimestamp
-      realExpiration
-    }
-  }`,
+          query: `
+query Subs($now: BigInt, $userAddress: Bytes, $receiver: Bytes) {
+  subs(
+    where: {owner: $userAddress, startTimestamp_lt: $now, realExpiration_gte: $now, receiver: $receiver}
+  ) {
+    startTimestamp
+    realExpiration
+  }
+}`,
           variables:{
               now: Math.floor(Date.now()/1e3),
-              userAddress
+              userAddress,
+              receiver: receiverAddress
           }
       })
   }).then(r=>r.json()).then(r=>r.data.subs.length>0)
 }
 
 // Example
-const subscribed = await isSubscribed("0x08a3c2A819E3de7ACa384c798269B3Ce1CD0e437")
+const subscribed = await isSubscribed("0x08a3c2A819E3de7ACa384c798269B3Ce1CD0e437", "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045")
 ```
 
 ## Subscribe popup
