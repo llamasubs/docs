@@ -30,16 +30,8 @@ const subscribed = await isSubscribed("0x08a3c2A819E3de7ACa384c798269B3Ce1CD0e43
 ```
 
 ## Subscribe popup
-Add an iframe to your html like the following:
-```html
-<iframe src="https://llamasubs.vercel.app/subscribe?to=0x08a3c2A819E3de7ACa384c798269B3Ce1CD0e437&amount=4"></iframe>
-```
-
-These are the properties you can use in the querystring:
-| Property | Usage                                                 | Example                                    |
-|----------|-------------------------------------------------------|--------------------------------------------|
-| to       | Address that will receive the subscription money      | 0x08a3c2A819E3de7ACa384c798269B3Ce1CD0e437 |
-| amount   | Amount in tokens (DAI) that will be charged per month | 5                                          |
+1. Create a checkout page on https://subscriptions.llamapay.io/create/subscription
+2. Redirect your users to the URL provided
 
 After the subscription has been purchased, an event will be sent to the parent window, which can be listened to like this:
 ```js
